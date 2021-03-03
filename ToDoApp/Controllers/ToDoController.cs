@@ -9,46 +9,46 @@ using ToDoApp.Services;
 namespace ToDoApp.Controllers
 {
     [Route("api/[controller]")]
-  public class ToDosController : ControllerBase
-  {
-
-    private readonly IToDoService _toDoService;
-
-    public ToDosController(IToDoService toDoService)
+    public class ToDosController : ControllerBase
     {
-        _toDoService = toDoService;
-    }
+        private readonly IToDoService _toDoService;
 
-    // GET: api/values
-    [HttpGet]
-    public async Task<List<ToDo>> Get()
-    {
-      return await _toDoService.getAllToDos();
-    }
+        public ToDosController(IToDoService toDoService)
+        {
+            _toDoService = toDoService;
+        }
 
-    // GET api/values/5
-    [HttpGet("{id}")]
-    public string Get(int id)
-    {
-      return "value";
-    }
+        // GET: api/values
+        [HttpGet]
+        public async Task<List<ToDo>> Get()
+        {
+            return await _toDoService.GetAllToDos();
+        }
 
-    // POST api/values
-    [HttpPost]
-    public void Post([FromBody] string value)
-    {
-    }
+        // GET api/values/5
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+          return "true";
+        }  
 
-    // PUT api/values/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
-    {
-    }
+        // POST api/values
+        [HttpPost]
+        public async Task<int> Post([FromBody] ToDo value)
+        {
+          return await _toDoService.AddToDo(value);
+        }
 
-    // DELETE api/values/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
+        // PUT api/values/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
+        }
+
+        // DELETE api/values/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+        }
     }
-  }
 }

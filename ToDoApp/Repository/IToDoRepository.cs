@@ -6,6 +6,10 @@ namespace ToDoApp.Repository
 {
     public interface IToDoRepository
     {
-         Task<List<ToDo>> getAllTodos();
+        Task<List<ToDo>> GetAllTodos();
+        Task<ToDo> GetToDo();
+        Task<int> AddToDo(ToDo todo);
+        Task<ToDo> EditToDo();
+        Task DeleteToDo();
     }
 }

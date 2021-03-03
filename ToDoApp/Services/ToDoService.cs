@@ -15,9 +15,29 @@ namespace ToDoApp.Services
             _repo = repository;
         }
 
-        public Task<List<ToDo>> getAllToDos()
+        public Task<int> AddToDo(ToDo todo)
         {
-            return _repo.getAllTodos();
+            return _repo.AddToDo(todo);
+        }
+
+        public Task DeleteToDo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ToDo> EditToDo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<ToDo>> GetAllToDos()
+        {
+            return _repo.GetAllTodos();
+        }
+
+        public Task<ToDo> GetToDo()
+        {
+            throw new NotImplementedException();
         }
     }
 }

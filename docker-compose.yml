@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: ToDoApp/Dockerfile
+    environment:
+      - ConnectionString=Server=database;Database=TodoDB;User Id=SA;Password=p@ssw0rd1;
   database:
     image: mcr.microsoft.com/mssql/server
     environment: 

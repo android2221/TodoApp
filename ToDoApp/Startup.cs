@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using ToDoApp.Entities;
 using ToDoApp.Services;
 using ToDoApp.Repository;
+using System;
 
 namespace ToDoApp
 {
@@ -24,7 +25,8 @@ namespace ToDoApp
         public void ConfigureServices(IServiceCollection services)
         {
             // Database Context
-            services.AddDbContext<DbContexts>(options => options.UseSqlServer("Server=database;Database=TodoDB;User Id=SA;Password=p@ssw0rd1;"));
+            services.AddDbContextPool<DbContexts>(options => 
+                options.UseSqlServer(Environment.GetEnvironmentVariable("ConnectionString")));
 
             // Services
             services.AddScoped<IToDoService, ToDoService>();
@@ -53,6 +55,7 @@ namespace ToDoApp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

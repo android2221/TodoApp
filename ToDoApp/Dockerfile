@@ -13,18 +13,20 @@ RUN apt-get install -y nodejs
 WORKDIR /src
 COPY ToDoApp/ToDoApp.csproj ToDoApp/
 RUN dotnet restore "ToDoApp/ToDoApp.csproj"
-COPY . .
+# COPY . .
 WORKDIR "/src/ToDoApp"
-RUN dotnet build "ToDoApp.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "ToDoApp.csproj" -c Release -o /app/publish
-
-FROM base AS final
-
-WORKDIR /app
-COPY --from=publish /app/publish .
-COPY ToDoApp/ClientApp/ .
+# RUN dotnet build "ToDoApp.csproj" -c Release -o /app/build
 RUN npm install
+ENTRYPOINT ["dotnet", "watch", "run"]
 
-ENTRYPOINT ["dotnet", "ToDoApp.dll"]
+# FROM build AS publish
+# RUN dotnet publish "ToDoApp.csproj" -c Release -o /app/publish
+
+# FROM base AS final
+
+# WORKDIR /app
+# COPY --from=publish /app/publish .
+# COPY ToDoApp/ClientApp/ .
+# RUN npm install
+
+# ENTRYPOINT ["dotnet", "ToDoApp.dll"]
