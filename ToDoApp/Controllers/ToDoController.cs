@@ -1,30 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ToDoApp.Entities;
 using ToDoApp.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ToDoApp.Controllers
 {
-  [Route("api/[controller]")]
-  public class ToDoController : Controller
+    [Route("api/[controller]")]
+  public class ToDosController : ControllerBase
   {
 
     private readonly IToDoService _toDoService;
 
-    public ToDoController(IToDoService toDoService)
+    public ToDosController(IToDoService toDoService)
     {
         _toDoService = toDoService;
     }
 
     // GET: api/values
     [HttpGet]
-    public IEnumerable<string> Get()
+    public async Task<List<ToDo>> Get()
     {
-      return new string[] { "value1", "value2" };
+      return await _toDoService.getAllToDos();
     }
 
     // GET api/values/5
