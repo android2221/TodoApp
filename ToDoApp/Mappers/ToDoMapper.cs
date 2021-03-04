@@ -2,9 +2,9 @@ using ToDoApp.Entities;
 
 namespace ToDoApp.Mappers
 {
-    public static class ToDoMapper
+    public static class ToDoMapper<T> where T : IBasicTodoItem
     {
-        public static ToDo MapChanges(ToDo inboundObject, ToDo objectToChange){
+        public static T MapChanges(T inboundObject, T objectToChange){
             objectToChange.Note = inboundObject.Note;
             objectToChange.Title = inboundObject.Title;
 
