@@ -27,9 +27,9 @@ namespace ToDoApp.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ToDo> Get(int id)
         {
-          return "true";
+          return await _toDoService.GetToDo(id);
         }  
 
         // POST api/values
@@ -39,16 +39,18 @@ namespace ToDoApp.Controllers
           return await _toDoService.AddToDo(value);
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT api/values/
+        [HttpPut]
+        public async Task<ToDo> Put([FromBody] ToDo value)
         {
+          return await _toDoService.EditToDo(value);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async void Delete(int id)
         {
+          await _toDoService.DeleteToDo(id);
         }
     }
 }

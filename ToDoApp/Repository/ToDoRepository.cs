@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ToDoApp.Entities;
 using Microsoft.EntityFrameworkCore;
+using ToDoApp.Mappers;
 
 namespace ToDoApp.Repository
 {
@@ -17,27 +18,30 @@ namespace ToDoApp.Repository
         public async Task<int> AddToDo(ToDo todo)
         {
             await _context.Todos.AddAsync(todo);
-            var id = await _context.SaveChangesAsync();
-            return id;
+            await _context.SaveChangesAsync();
+            return todo.ID;
         }
 
-        public Task DeleteToDo()
+        public async Task DeleteToDo(int id)
         {
-            throw new System.NotImplementedException();
+            await _context.Todos.FirstAsync<ToDo>(x => x.ID == id);
         }
 
-        public Task<ToDo> EditToDo()
+        public async Task<ToDo> EditToDo(ToDo inboundTodo)
         {
-            throw new System.NotImplementedException();
+            var editItem = await _context.Todos.FirstAsync<ToDo>(x => x.ID == inboundTodo.ID);
+            var editedObject = ToDoMapper.MapChanges(inboundTodo, editItem);
+            await _context.SaveChangesAsync();
+            return editedObject;
         }
 
         public async Task<List<ToDo>> GetAllTodos(){
             return await _context.Todos.ToListAsync();
         }
 
-        public Task<ToDo> GetToDo()
+        public async Task<ToDo> GetToDo(int id)
         {
-            throw new System.NotImplementedException();
+            return await _context.Todos.FirstAsync<ToDo>(x => x.ID == id);
         }
     }
 }

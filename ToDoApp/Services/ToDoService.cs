@@ -20,14 +20,14 @@ namespace ToDoApp.Services
             return _repo.AddToDo(todo);
         }
 
-        public Task DeleteToDo()
+        public async Task DeleteToDo(int id)
         {
-            throw new NotImplementedException();
+            await _repo.DeleteToDo(id);
         }
 
-        public Task<ToDo> EditToDo()
+        public async Task<ToDo> EditToDo(ToDo todo)
         {
-            throw new NotImplementedException();
+            return await _repo.EditToDo(todo);
         }
 
         public Task<List<ToDo>> GetAllToDos()
@@ -35,9 +35,9 @@ namespace ToDoApp.Services
             return _repo.GetAllTodos();
         }
 
-        public Task<ToDo> GetToDo()
+        public Task<ToDo> GetToDo(int id)
         {
-            throw new NotImplementedException();
+            return _repo.GetToDo(id);
         }
     }
 }

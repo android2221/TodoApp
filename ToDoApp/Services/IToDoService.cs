@@ -7,9 +7,9 @@ namespace ToDoApp.Services
     public interface IToDoService
     {
         Task<List<ToDo>> GetAllToDos();
-        Task<ToDo> GetToDo();
+        Task<ToDo> GetToDo(int id);
         Task<int> AddToDo(ToDo todo);
-        Task<ToDo> EditToDo();
-        Task DeleteToDo();
+        Task<ToDo> EditToDo(ToDo todo);
+        Task DeleteToDo(int id);
     }
 }
