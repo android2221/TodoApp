@@ -11,9 +11,9 @@ namespace ToDoApp.Controllers
     [Route("api/[controller]")]
     public class ToDosController : ControllerBase
     {
-        private readonly IBasicService _toDoService;
+        private readonly IBasicService<ToDo> _toDoService;
 
-        public ToDosController(IBasicService toDoService)
+        public ToDosController(IBasicService<ToDo> toDoService)
         {
             _toDoService = toDoService;
         }
@@ -22,35 +22,35 @@ namespace ToDoApp.Controllers
         [HttpGet]
         public async Task<List<ToDo>> Get()
         {
-            return await _toDoService.GetAllToDos();
+            return await _toDoService.GetAllItems();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public async Task<ToDo> Get(int id)
         {
-          return await _toDoService.GetToDo(id);
+          return await _toDoService.GetItem(id);
         }  
 
         // POST api/values
         [HttpPost]
         public async Task<int> Post([FromBody] ToDo value)
         {
-          return await _toDoService.AddToDo(value);
+          return await _toDoService.AddItem(value);
         }
 
         // PUT api/values/
         [HttpPut]
         public async Task<ToDo> Put([FromBody] ToDo value)
         {
-          return await _toDoService.EditToDo(value);
+          return await _toDoService.EditItem(value);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public async void Delete(int id)
+        public async Task Delete(int id)
         {
-          await _toDoService.DeleteToDo(id);
+          await _toDoService.DeleteItem(id);
         }
     }
 }

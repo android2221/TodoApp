@@ -29,8 +29,8 @@ namespace ToDoApp
                 options.UseSqlServer(Environment.GetEnvironmentVariable("ConnectionString")));
 
             // Services
-            services.AddScoped<IBasicService, BasicService>();
-            services.AddScoped<IBasicRepository, BasicRepository>();
+            services.AddScoped<IBasicService<ToDo>, BasicService<ToDo>>();
+            services.AddScoped<IBasicRepository<ToDo>, BasicRepository<ToDo>>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

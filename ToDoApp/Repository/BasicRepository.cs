@@ -26,12 +26,14 @@ namespace ToDoApp.Repository
 
         public async Task DeleteItem(int id)
         {
-            await _entities.FirstAsync<T>(x => x.ID == id);
+            var item = await _entities.FirstOrDefaultAsync<T>(x => x.ID == id);
+            _entities.Remove(item);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<T> EditItem(T inboundItem)
         {
-            var editItem = await _entities.FirstAsync<T>(x => x.ID == inboundItem.ID);
+            var editItem = await _entities.FirstOrDefaultAsync<T>(x => x.ID == inboundItem.ID);
             var editedObject = ToDoMapper<T>.MapChanges(inboundItem, editItem);
             await _context.SaveChangesAsync();
             return editedObject;
@@ -43,7 +45,7 @@ namespace ToDoApp.Repository
 
         public async Task<T> GetItem(int id)
         {
-            return await _entities.FirstAsync<T>(x => x.ID == id);
+            return await _entities.FirstOrDefaultAsync<T>(x => x.ID == id);
         }
     }
 }
