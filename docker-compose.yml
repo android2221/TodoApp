@@ -19,3 +19,5 @@ services:
     build: ./DatabaseMigrator
     depends_on: 
       - database
+    volumes:
+      - ./DatabaseMigrator/Scripts/:/app/dbscripts/

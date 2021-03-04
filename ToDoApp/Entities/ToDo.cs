@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ToDoApp.Entities
+﻿namespace ToDoApp.Entities
 {
   public class ToDo : IBasicTodoItem
   {
