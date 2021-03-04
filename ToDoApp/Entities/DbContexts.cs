@@ -12,6 +12,7 @@ namespace ToDoApp.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             modelBuilder.Entity<ToDo>().ToTable("Todos");
+            modelBuilder.Entity<Event>().ToTable("Events");
         }
     }
 }

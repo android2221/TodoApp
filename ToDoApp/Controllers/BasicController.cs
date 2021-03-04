@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ToDoApp.Entities;
 using ToDoApp.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,48 +8,48 @@ using ToDoApp.Services;
 namespace ToDoApp.Controllers
 {
     [Route("api/[controller]")]
-    public class ToDosController : ControllerBase
+    public class BasicController<T> : ControllerBase
     {
-        private readonly IBasicService<ToDo> _toDoService;
+        private readonly IBasicService<T> _service;
 
-        public ToDosController(IBasicService<ToDo> toDoService)
+        public BasicController(IBasicService<T> service)
         {
-            _toDoService = toDoService;
+            _service = service;
         }
 
         // GET: api/values
         [HttpGet]
-        public async Task<List<ToDo>> Get()
+        public async Task<List<T>> Get()
         {
-            return await _toDoService.GetAllItems();
+            return await _service.GetAllItems();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public async Task<ToDo> Get(int id)
+        public async Task<T> Get(int id)
         {
-          return await _toDoService.GetItem(id);
+          return await _service.GetItem(id);
         }  
 
         // POST api/values
         [HttpPost]
-        public async Task<int> Post([FromBody] ToDo value)
+        public async Task<int> Post([FromBody] T value)
         {
-          return await _toDoService.AddItem(value);
+          return await _service.AddItem(value);
         }
 
         // PUT api/values/
         [HttpPut]
-        public async Task<ToDo> Put([FromBody] ToDo value)
+        public async Task<T> Put([FromBody] T value)
         {
-          return await _toDoService.EditItem(value);
+          return await _service.EditItem(value);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
-          await _toDoService.DeleteItem(id);
+          await _service.DeleteItem(id);
         }
     }
 }

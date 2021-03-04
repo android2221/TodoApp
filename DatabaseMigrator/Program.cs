@@ -34,8 +34,6 @@ namespace DatabaseMigrator
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Success!");
             Console.ResetColor();
-            System.Threading.Thread.Sleep(50000000);
-
             return 0;
         }
     }

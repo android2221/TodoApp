@@ -6,7 +6,7 @@ using ToDoApp.Mappers;
 
 namespace ToDoApp.Repository
 {
-    public class BasicRepository<T> : IBasicRepository<T> where T : class, IBasicTodoItem
+    public class BasicRepository<T> : IBasicRepository<T> where T : class, IBasicItem
     {
         private readonly DbContexts _context;
         private readonly DbSet<T> _entities;

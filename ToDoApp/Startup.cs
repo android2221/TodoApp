@@ -31,6 +31,8 @@ namespace ToDoApp
             // Services
             services.AddScoped<IBasicService<ToDo>, BasicService<ToDo>>();
             services.AddScoped<IBasicRepository<ToDo>, BasicRepository<ToDo>>();
+            services.AddScoped<IBasicService<Event>, BasicService<Event>>();
+            services.AddScoped<IBasicRepository<Event>, BasicRepository<Event>>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

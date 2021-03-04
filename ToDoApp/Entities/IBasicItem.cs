@@ -1,6 +1,6 @@
 namespace ToDoApp.Entities
 {
-    public interface IBasicTodoItem
+    public interface IBasicItem
     {
         int ID { get; set; }
         string Title { get; set; }
